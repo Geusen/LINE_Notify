@@ -1,15 +1,9 @@
 import settings
-import datetime
-import tweepy
-import discord
-import os
-import time
 import requests
-import cv2 
-import numpy as np
-from pydrive.auth import GoogleAuth
-from pydrive.drive import GoogleDrive
+import tweepy
+import time
 from PIL import Image
+from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
