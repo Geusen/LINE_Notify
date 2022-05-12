@@ -26,8 +26,8 @@ driver = webdriver.Chrome('chromedriver',options=options)
 driver.implicitly_wait(10)
 
 # ウインドウ幅、高さ指定
-windowSizeWidth = 1600
-windowSizeHeight = 1500
+windowSizeWidth = 1400
+windowSizeHeight = 1000
 
 # サイトURL取得
 driver.get('https://translate.google.co.jp/translate?u=https%3A%2F%2Fopenweathermap.org%2Fcity%2F2111901')
