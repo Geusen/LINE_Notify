@@ -48,8 +48,9 @@ time.sleep(1)
 driver.quit()
 
 # 画像トリミング
-im = Image.open('before.png')
-im.crop((35, 145, 640, 645)).save('now.png', quality=95)
+#im = Image.open('before.png')
+#im.crop((35, 145, 640, 645)).save('upload.png', quality=95)
+#im.crop((35, 145, 640, 645)).save('upload.png', quality=95)
 #-----------------------------------------------------------------------------
 # keyの指定(情報漏えいを防ぐため伏せています)
 token = settings.LT
@@ -58,8 +59,8 @@ token = settings.LT
 line_url = 'https://notify-api.line.me/api/notify'
 line_access_token = token
 headers = {'Authorization': 'Bearer ' + line_access_token}
-line_message = '時間割が更新されました。'
-line_image = 'upload.png'
+line_message = 'test'
+line_image = 'before.png'
 payload = {'message': line_message}
 files = {'imageFile': open(line_image, 'rb')}
 r = requests.post(line_url, headers=headers, params=payload, files=files,)
