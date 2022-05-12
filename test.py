@@ -27,7 +27,7 @@ driver.implicitly_wait(10)
 
 # ウインドウ幅、高さ指定
 windowSizeWidth = 680
-windowSizeHeight = 700
+windowSizeHeight = 1500
 
 # サイトURL取得
 driver.get('https://translate.google.co.jp/translate?u=https%3A%2F%2Fopenweathermap.org%2Fcity%2F2111901')
