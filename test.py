@@ -15,29 +15,7 @@ dt = datetime.datetime.utcnow() + datetime.timedelta(hours=9)
 w_list = ['月', '火', '水', '木', '金', '土', '日']
 print('')
 print(dt.strftime('[%Y年%m月%d日(' + w_list[dt.weekday()] + ') %H:%M:%S]'))
-#-----------------------------------------------------------------------------
-# keyの指定(情報漏えいを防ぐため伏せています)
-token = settings.LT
-
-#LINEの設定(伏せています)
-line_url = 'https://notify-api.line.me/api/notify'
-line_access_token = token
-headers = {'Authorization': 'Bearer ' + line_access_token}
-line_message = '時間割が更新されました。'
-line_image = 'upload.png'
-payload = {'message': line_message}
-files = {'imageFile': open(line_image, 'rb')}
-r = requests.post(line_url, headers=headers, params=payload, files=files,)
-
-#Discordの設定
-Discord_token = settings.DT
-channel_id = int(settings.DI)
-
-#Googleにログイン
-gauth = GoogleAuth()
-gauth.LocalWebserverAuth()
-drive = GoogleDrive(gauth)
-#-----------------------------------------------------------------------------
+---------------------------------------------------
 # Chromeヘッドレスモード起動
 options = webdriver.ChromeOptions()
 options.headless = True
@@ -73,74 +51,15 @@ driver.quit()
 im = Image.open('before.png')
 im.crop((35, 145, 640, 645)).save('now.png', quality=95)
 #-----------------------------------------------------------------------------
-#関数定義
-def exclusion(x):
-  f = drive.CreateFile({'id': file_id})
-  f.GetContentFile(x)
-  #画像比較
-  img_1 = cv2.imread('now.png')
-  img_2 = cv2.imread(x)
-  #画像が真っ白なら中止
-  if np.array_equal(img_1, img_2) == True:
-    print('編集中の為、終了(' + x + ')')
-    exit()
+# keyの指定(情報漏えいを防ぐため伏せています)
+token = settings.LT
 
-#画像取得(白1)
-file_id = drive.ListFile({'q': 'title = "white1.jpg"'}).GetList()[0]['id']
-exclusion('white1.jpg')
-
-#画像取得(白2)
-file_id = drive.ListFile({'q': 'title = "white2.jpg"'}).GetList()[0]['id']
-exclusion('white2.jpg')
-
-#画像取得(エラー画像)
-GetFile = "\"error.png\""
-file_id = drive.ListFile({'q': f'title = {GetFile}'}).GetList()[0]['id']
-exclusion('error.png')
-#-----------------------------------------------------------------------------
-#画像取得(時間割)
-file_id = drive.ListFile({'q': 'title = "upload.png"'}).GetList()[0]['id']
-f = drive.CreateFile({'id': file_id})
-f.GetContentFile('upload.png')
-
-#画像比較
-img_1 = cv2.imread('now.png')
-img_2 = cv2.imread('upload.png')
-print("一致度: " + str(np.count_nonzero(img_1 == img_2)))
-
-#もしスクショした画像とアップロード済みの画像が異なる(＝時間割が更新された)なら
-if np.count_nonzero(img_1 == img_2) < 450000:
-  #既にある画像を削除後、アップロード
-  os.remove('upload.png')
-  os.rename('now.png', 'upload.png')
-  f.Delete()
-  f = drive.CreateFile()
-  f.SetContentFile('upload.png')
-  f.Upload()
-  print('アップロード完了')
-  
-  #画像付きツイート
-  api.update_status_with_media(status="時間割が更新されました！", filename="upload.png")
-  
-  #LINEへ通知
-  line_notify(notify_group)
-  #27組用
-  line_notify(notify_27)
-  
-  #Discordの接続に必要なオブジェクトを生成
-  client = discord.Client()
-  #DiscordBot起動時に動作する処理
-  @client.event
-  async def on_ready():
-      channel = client.get_channel(channel_id)
-      await channel.send('時間割が更新されました。', file=discord.File('upload.png'))
-      await client.close()
-  client.run(Discord_token)
-  print('通知完了')
-
-
-else:
-  #終了
-  print('画像が一致した為、終了')
-  exit()
-
+#LINEの設定(伏せています)
+line_url = 'https://notify-api.line.me/api/notify'
+line_access_token = token
+headers = {'Authorization': 'Bearer ' + line_access_token}
+line_message = '時間割が更新されました。'
+line_image = 'upload.png'
+payload = {'message': line_message}
+files = {'imageFile': open(line_image, 'rb')}
+r = requests.post(line_url, headers=headers, params=payload, files=files,)
