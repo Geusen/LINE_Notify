@@ -28,8 +28,8 @@ driver.implicitly_wait(10)
 windowSizeWidth = 680
 windowSizeHeight = 700
 
-# サイトURL取得(伏せています)
-driver.get(settings.GU)
+# サイトURL取得
+driver.get('https://translate.google.co.jp/translate?u=https%3A%2F%2Fopenweathermap.org%2Fcity%2F2111901')
 WebDriverWait(driver, 15).until(EC.presence_of_all_elements_located)
   
 # ウインドウ幅・高さ指定
