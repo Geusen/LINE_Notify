@@ -61,7 +61,7 @@ line_url = 'https://notify-api.line.me/api/notify'
 line_access_token = token
 headers = {'Authorization': 'Bearer ' + line_access_token}
 line_message = 'test2'
-line_image = 'before.png'
+line_image = 'upload.png'
 payload = {'message': line_message}
 files = {'imageFile': open(line_image, 'rb')}
 r = requests.post(line_url, headers=headers, params=payload, files=files,)
