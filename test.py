@@ -51,6 +51,7 @@ driver.quit()
 # 画像トリミング
 im = Image.open('before.png')
 im.crop((550, 550, 950, 900)).save('upload.png', quality=95)
+print("トリミング完了")
 #-----------------------------------------------------------------------------
 # keyの指定(情報漏えいを防ぐため伏せています)
 token = settings.LT
@@ -64,3 +65,4 @@ line_image = 'upload.png'
 payload = {'message': line_message}
 files = {'imageFile': open(line_image, 'rb')}
 r = requests.post(line_url, headers=headers, params=payload, files=files,)
+print("通知完了")
