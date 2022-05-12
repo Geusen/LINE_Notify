@@ -26,7 +26,7 @@ driver = webdriver.Chrome('chromedriver',options=options)
 driver.implicitly_wait(10)
 
 # ウインドウ幅、高さ指定
-windowSizeWidth = 680
+windowSizeWidth = 1600
 windowSizeHeight = 1500
 
 # サイトURL取得
