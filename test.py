@@ -50,7 +50,7 @@ driver.quit()
 
 # 画像トリミング
 im = Image.open('before.png')
-im.crop((550, 550, 950, 900)).save('upload.png', quality=95)
+im.crop((550, 500, 920, 850)).save('upload.png', quality=95)
 print("トリミング完了")
 #-----------------------------------------------------------------------------
 # keyの指定(情報漏えいを防ぐため伏せています)
