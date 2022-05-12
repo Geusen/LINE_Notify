@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
 
 env:  #環境変数から文字列(パスワードなど)を取得
-  LINE_TOKEN: ${{secrets.LINE_TOKEN}}
+  LINE_TOKEN: ${{secrets.LINE_TOKEN}}#sudo apt-get -y install fonts-ipafont-mincho
 
 jobs:
   python:
@@ -19,7 +19,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install get-chrome-driver --upgrade
           sudo apt-get -y install fonts-ipafont-gothic
-          #sudo apt-get -y install fonts-ipafont-mincho
           pip install python-dotenv
           pip install selenium
           pip install requests
