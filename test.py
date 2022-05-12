@@ -1,6 +1,7 @@
 import settings
 import requests
 import time
+import datetime
 from PIL import Image
 from bs4 import BeautifulSoup
 from selenium import webdriver
